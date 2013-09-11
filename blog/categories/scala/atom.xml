@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Rafael's blog]]></title>
-  <link href="http://rafael81.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: scala, | Rafael's blog]]></title>
+  <link href="http://rafael81.github.io/blog/categories/scala/atom.xml" rel="self"/>
   <link href="http://rafael81.github.io/"/>
   <updated>2013-09-11T17:03:01+09:00</updated>
   <id>http://rafael81.github.io/</id>
@@ -21,24 +21,6 @@
     <content type="html"><![CDATA[<h1>이클립스에 scala ide 설치하기</h1>
 
 <p>eclipse 에서 help->eclipse market place 선택</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[프록시(proxy)에 관한 모든것]]></title>
-    <link href="http://rafael81.github.io/blog/2013/08/31/peurogsi-proxy-e-gwanhan-modeungeos/"/>
-    <updated>2013-08-31T18:00:00+09:00</updated>
-    <id>http://rafael81.github.io/blog/2013/08/31/peurogsi-proxy-e-gwanhan-modeungeos</id>
-    <content type="html"><![CDATA[<h1>ssh via socks proxies</h1>
-
-<h3>proxy 환경에서 github에 push 가 안될경우</h3>
-
-<blockquote><p>~/.ssh/config 파일에 아래 설정 파일을 생성해 준다.</p></blockquote>
-
-<pre><code>Host github.com
-    HostName github.com
-    ProxyCommand=nc -x localhost:8081 %h %p
-</code></pre>
 ]]></content>
   </entry>
   
