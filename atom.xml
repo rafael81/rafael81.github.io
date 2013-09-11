@@ -4,7 +4,7 @@
   <title><![CDATA[Rafael's blog]]></title>
   <link href="http://rafael81.github.io/atom.xml" rel="self"/>
   <link href="http://rafael81.github.io/"/>
-  <updated>2013-09-11T17:15:18+09:00</updated>
+  <updated>2013-09-11T19:50:09+09:00</updated>
   <id>http://rafael81.github.io/</id>
   <author>
     <name><![CDATA[rafael]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[maven 에서 java 와 scala 같이 쓰기]]></title>
+    <title type="html"><![CDATA[eclipse 에서 maven 으로 java 와 scala 같이 쓰기]]></title>
     <link href="http://rafael81.github.io/blog/2013/09/11/maven-eseo-java-wa-scala-gati-sseugi/"/>
     <updated>2013-09-11T16:51:00+09:00</updated>
     <id>http://rafael81.github.io/blog/2013/09/11/maven-eseo-java-wa-scala-gati-sseugi</id>
@@ -23,6 +23,171 @@
 <h2>이클립스에 scala ide 설치하기</h2>
 
 <p>eclipse 에서 help->eclipse market place 선택->&ldquo;scala&#8221;로 검색->The Scala IDE for Eclipse 의 Install 버튼 클릭->Next->I accept~ 체크->Finish->설치완료 후 eclipse 재시작</p>
+
+<h2>Install m2eclipse-scala</h2>
+
+<p>Help->Install new software-> work with 에 <a href="http://alchim31.free.fr/m2e-scala/update-site">http://alchim31.free.fr/m2e-scala/update-site</a> 입력 후 엔터->설치-> eclipse 재시작</p>
+
+<p>(참고:<a href="http://scala-ide.org/docs/tutorials/m2eclipse/index.html">http://scala-ide.org/docs/tutorials/m2eclipse/index.html</a>)</p>
+
+<h2>환경설정</h2>
+
+<p>eclipse 에서 Window->Preferences->Scala->Compiler 에서 target 을 java 에서 사용하는 jvm 버전과 동일하게 설정.
+예) jvm-1.7</p>
+
+<h2>pom.xml 에 추가</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;properties&gt;
+</span><span class='line'>  &lt;java.version&gt;1.7&lt;/java.version&gt;
+</span><span class='line'>  &lt;scala-version&gt;2.10.2&lt;/scala-version&gt;
+</span><span class='line'>&lt;/properties&gt;        
+</span><span class='line'>&lt;dependencies&gt;
+</span><span class='line'>  &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.scala-lang&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;scala-library&lt;/artifactId&gt;
+</span><span class='line'>      &lt;scope&gt;compile&lt;/scope&gt;
+</span><span class='line'>      &lt;version&gt;${scala-version}&lt;/version&gt;
+</span><span class='line'>  &lt;/dependency&gt;
+</span><span class='line'>&lt;/dependencies&gt;
+</span><span class='line'>&lt;build&gt;
+</span><span class='line'>  &lt;pluginManagement&gt;
+</span><span class='line'>      &lt;plugins&gt;
+</span><span class='line'>          &lt;plugin&gt;
+</span><span class='line'>              &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
+</span><span class='line'>              &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
+</span><span class='line'>              &lt;version&gt;3.1.5&lt;/version&gt;
+</span><span class='line'>          &lt;/plugin&gt;
+</span><span class='line'>          &lt;plugin&gt;
+</span><span class='line'>              &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>              &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+</span><span class='line'>              &lt;version&gt;2.5.1&lt;/version&gt;
+</span><span class='line'>          &lt;/plugin&gt;
+</span><span class='line'>      &lt;/plugins&gt;
+</span><span class='line'>  &lt;/pluginManagement&gt;
+</span><span class='line'>  &lt;plugins&gt;
+</span><span class='line'>      &lt;plugin&gt;
+</span><span class='line'>          &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
+</span><span class='line'>          &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
+</span><span class='line'>          &lt;executions&gt;
+</span><span class='line'>              &lt;execution&gt;
+</span><span class='line'>                  &lt;id&gt;scala-compile-first&lt;/id&gt;
+</span><span class='line'>                  &lt;phase&gt;process-resources&lt;/phase&gt;
+</span><span class='line'>                  &lt;goals&gt;
+</span><span class='line'>                      &lt;goal&gt;add-source&lt;/goal&gt;
+</span><span class='line'>                      &lt;goal&gt;compile&lt;/goal&gt;
+</span><span class='line'>                  &lt;/goals&gt;
+</span><span class='line'>              &lt;/execution&gt;
+</span><span class='line'>              &lt;execution&gt;
+</span><span class='line'>                  &lt;id&gt;scala-test-compile&lt;/id&gt;
+</span><span class='line'>                  &lt;phase&gt;process-test-resources&lt;/phase&gt;
+</span><span class='line'>                  &lt;goals&gt;
+</span><span class='line'>                      &lt;goal&gt;testCompile&lt;/goal&gt;
+</span><span class='line'>                  &lt;/goals&gt;
+</span><span class='line'>              &lt;/execution&gt;
+</span><span class='line'>          &lt;/executions&gt;
+</span><span class='line'>      &lt;/plugin&gt;
+</span><span class='line'>      &lt;plugin&gt;
+</span><span class='line'>          &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+</span><span class='line'>          &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+</span><span class='line'>          &lt;configuration&gt;
+</span><span class='line'>              &lt;source&gt;${java.version}&lt;/source&gt;
+</span><span class='line'>              &lt;target&gt;${java.version}&lt;/target&gt;
+</span><span class='line'>              &lt;compilerArgument&gt;-Xlint:all&lt;/compilerArgument&gt;
+</span><span class='line'>              &lt;showWarnings&gt;true&lt;/showWarnings&gt;
+</span><span class='line'>              &lt;showDeprecation&gt;true&lt;/showDeprecation&gt;
+</span><span class='line'>          &lt;/configuration&gt;
+</span><span class='line'>          
+</span><span class='line'>          &lt;executions&gt;
+</span><span class='line'>              &lt;execution&gt;
+</span><span class='line'>                  &lt;phase&gt;compile&lt;/phase&gt;
+</span><span class='line'>                  &lt;goals&gt;
+</span><span class='line'>                      &lt;goal&gt;compile&lt;/goal&gt;
+</span><span class='line'>                  &lt;/goals&gt;
+</span><span class='line'>              &lt;/execution&gt;
+</span><span class='line'>          &lt;/executions&gt;
+</span><span class='line'>      &lt;/plugin&gt;
+</span><span class='line'>     &lt;/plugins&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>에러메시지 조치사항</h2>
+
+<p>pom.xml 에서 아래 에러 메시지 발생시</p>
+
+<blockquote><p>plugin execution not covered by lifecycle configuration net.alchim31</p></blockquote>
+
+<p>m2eclipse-scala 가 정상적으로 설치 되어있는지 확인한다.</p>
+
+<p>(참고: <a href="http://stackoverflow.com/questions/13995236/avoid-eclipse-ignore-garbage-in-scala-maven-project">http://stackoverflow.com/questions/13995236/avoid-eclipse-ignore-garbage-in-scala-maven-project</a>)</p>
 ]]></content>
   </entry>
   
