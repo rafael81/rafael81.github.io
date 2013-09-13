@@ -4,7 +4,7 @@
   <title><![CDATA[Rafael's blog]]></title>
   <link href="http://rafael81.github.io/atom.xml" rel="self"/>
   <link href="http://rafael81.github.io/"/>
-  <updated>2013-09-11T19:50:09+09:00</updated>
+  <updated>2013-09-13T18:59:10+09:00</updated>
   <id>http://rafael81.github.io/</id>
   <author>
     <name><![CDATA[rafael]]></name>
@@ -12,6 +12,22 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[intellj 좋은점을 찾아보자]]></title>
+    <link href="http://rafael81.github.io/blog/2013/09/13/intellj-joheunjeomeul-cajaboja/"/>
+    <updated>2013-09-13T18:30:00+09:00</updated>
+    <id>http://rafael81.github.io/blog/2013/09/13/intellj-joheunjeomeul-cajaboja</id>
+    <content type="html"><![CDATA[<ol>
+<li>반응 속도가 빨라서 맘에든다</li>
+<li>메모리를 적게 먹는다.</li>
+<li>처음 설치시 VCS, EDITOR, WS 서버 모든 플러그인을 선택해서 설치할 수있다. 이클립스 였다면 마켓 뒤져가면서 설치해야 했겠지</li>
+<li>Tools 메뉴에 Rest Client, SoapUI 도 있네(SoapUI 는 내가 설치해놔서 그런가&hellip;)</li>
+<li>Tomcat catalina, localhost 로그를 바로 볼수 있네</li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[eclipse 에서 maven 으로 java 와 scala 같이 쓰기]]></title>
