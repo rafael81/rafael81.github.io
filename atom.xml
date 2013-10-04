@@ -4,7 +4,7 @@
   <title><![CDATA[Rafael's blog]]></title>
   <link href="http://rafael81.github.io/atom.xml" rel="self"/>
   <link href="http://rafael81.github.io/"/>
-  <updated>2013-09-25T20:34:59+09:00</updated>
+  <updated>2013-10-04T16:28:47+09:00</updated>
   <id>http://rafael81.github.io/</id>
   <author>
     <name><![CDATA[rafael]]></name>
@@ -175,7 +175,7 @@
 </span><span class='line'>          &lt;plugin&gt;
 </span><span class='line'>              &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
 </span><span class='line'>              &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
-</span><span class='line'>              &lt;version&gt;3.1.5&lt;/version&gt;
+</span><span class='line'>              &lt;version&gt;3.1.6&lt;/version&gt;
 </span><span class='line'>          &lt;/plugin&gt;
 </span><span class='line'>          &lt;plugin&gt;
 </span><span class='line'>              &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
@@ -238,6 +238,10 @@
 <p>m2eclipse-scala 가 정상적으로 설치 되어있는지 확인한다.</p>
 
 <p>(참고: <a href="http://stackoverflow.com/questions/13995236/avoid-eclipse-ignore-garbage-in-scala-maven-project">http://stackoverflow.com/questions/13995236/avoid-eclipse-ignore-garbage-in-scala-maven-project</a>)</p>
+
+<p>updated 2013.10.4</p>
+
+<p>Package Explorer 에서 Scala Library 가 포함되어 있지 않다면 Maven 에서 update project 를 한번 해준다.</p>
 ]]></content>
   </entry>
   
