@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>JsonIgnore does not work!!! - Rafael's blog</title>
+  <meta name="author" content="rafael">
+
+  
+  <meta name="description" content="어느날 갑자기 Spring mvc(v3.2.2)로 구현해놓은 REST API JSON 응답값에 null 값을 가지고 있는 필드가 포함이 되는 문제가 생겼다. 분명히 도메인 객체에 @JsonSerialize(include = Inclusion.NON_NULL) 이 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rafael81.github.io/blog/2013/10/14/jsonignore-does-not-work">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Rafael's blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rafael's blog</a></h1>
+  
+    <h2>Make simple</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rafael81.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">JsonIgnore Does Not Work!!!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-14T20:00:00+09:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>어느날 갑자기 Spring mvc(<code>v3.2.2</code>)로 구현해놓은 REST API JSON 응답값에 null 값을 가지고 있는 필드가 포함이 되는 문제가 생겼다.</p>
+
+<p>분명히 도메인 객체에 <code>@JsonSerialize(include = Inclusion.NON_NULL)</code> 이 설정되어있고 잘 동작하던 코드였다.</p>
+
+<p>한참동안 디버깅을 해보다가 도저히 원인을 찾을수가 없어 결국 내가 커밋했던 부분들을 하나씩 롤백해보았다.(다행히 프로젝트는 초기상태였고 활발하게 개발중이 아니였다)</p>
+
+<p>어이없게도 aws 를 사용하기 위해 추가 했던 <code>aws-java-sdk 1.5.6</code> 가 문제였다.</p>
+
+<blockquote><p>릴리즈 노트 : <a href="http://aws.amazon.com/releasenotes/Java/7728064532185471">http://aws.amazon.com/releasenotes/Java/7728064532185471</a></p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    &lt;!-- aws java sdk --&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>        &lt;groupId&gt;com.amazonaws&lt;/groupId&gt;
+</span><span class='line'>        &lt;artifactId&gt;aws-java-sdk&lt;/artifactId&gt;
+</span><span class='line'>        &lt;version&gt;1.5.6&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>원인은 <code>aws-java-sdk 1.5.6</code> 버전부터 jackson 라이브러리를 <code>2.1.2</code> 버전을 사용한다.</p>
+
+<p>프로젝트에서 이미 사용중인 jackson 라이브러리는 <code>1.9.6</code> 이였다.</p>
+
+<p>소스에는 <code>1.5.7</code> 로 되어있으나 maven 라이브러리 <code>aws-java-sdk 1.5.6</code> 는 <code>2.1.2</code> 버전을 사용한다.</p>
+
+<blockquote><p><a href="https://github.com/aws/aws-sdk-java/commit/6d88d2ed9c5ed80619a3397fd484fdc1f8a221de#diff-600376dffeb79835ede4a0b285078036R26">https://github.com/aws/aws-sdk-java/commit/6d88d2ed9c5ed80619a3397fd484fdc1f8a221de#diff-600376dffeb79835ede4a0b285078036R26</a></p></blockquote>
+
+<p>하지만 아무리 릴리즈 노트를 찾아봐도 이에 대한 설명은 없다.</p>
+
+<p>당장 해결책은 <code>aws-java-sdk 1.5.5</code> 를 사용하도록 하였으나 추후에 <code>aws-java-sdk</code> 를 업데이트 해야할 경우에 문제가 될 수도 있다.</p>
+
+<p>아무래도 <code>jackson 2.1.2</code> 라이브러리가 프로젝트에 포함되면서 기존 <code>1.9.6</code> 버전을 무력화 시켜버리는것 같다.</p>
+
+<p>참고로 <code>jackson 2.1.2</code> 버전은 패키지명이 <code>com.fasterxml</code> 로 시작하고 <code>1.9.6</code> 버전은 <code>org.codehaus</code> 로 시작한다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rafael</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-14T20:00:00+09:00" pubdate data-updated="true">Oct 14<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/codehaus/'>codehaus,</a>, <a class='category' href='/blog/categories/fasterxml/'>fasterxml</a>, <a class='category' href='/blog/categories/jackson/'>jackson,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://rafael81.github.io/blog/2013/10/14/jsonignore-does-not-work/" data-via="" data-counturl="http://rafael81.github.io/blog/2013/10/14/jsonignore-does-not-work/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/09/13/intellj-joheunjeomeul-cajaboja/" title="Previous Post: intellj 좋은점을 찾아보자">&laquo; intellj 좋은점을 찾아보자</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/14/jsonignore-does-not-work/">JsonIgnore Does Not Work!!!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/13/intellj-joheunjeomeul-cajaboja/">Intellj 좋은점을 찾아보자</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/11/maven-eseo-java-wa-scala-gati-sseugi/">Eclipse 에서 Maven 으로 Java 와 Scala 같이 쓰기</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/31/peurogsi-proxy-e-gwanhan-modeungeos/">프록시(proxy)에 관한 모든것</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - rafael -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

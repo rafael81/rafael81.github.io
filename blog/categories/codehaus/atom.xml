@@ -4,7 +4,7 @@
   <title><![CDATA[Category: codehaus, | Rafael's blog]]></title>
   <link href="http://rafael81.github.io/blog/categories/codehaus/atom.xml" rel="self"/>
   <link href="http://rafael81.github.io/"/>
-  <updated>2013-10-14T20:33:36+09:00</updated>
+  <updated>2013-10-14T20:46:40+09:00</updated>
   <id>http://rafael81.github.io/</id>
   <author>
     <name><![CDATA[rafael]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[@JsonIgnore does not work!!!]]></title>
-    <link href="http://rafael81.github.io/blog/2013/10/14/at-jsonignore-does-not-work/"/>
+    <title type="html"><![CDATA[JsonIgnore does not work!!!]]></title>
+    <link href="http://rafael81.github.io/blog/2013/10/14/jsonignore-does-not-work/"/>
     <updated>2013-10-14T20:00:00+09:00</updated>
-    <id>http://rafael81.github.io/blog/2013/10/14/at-jsonignore-does-not-work</id>
+    <id>http://rafael81.github.io/blog/2013/10/14/jsonignore-does-not-work</id>
     <content type="html"><![CDATA[<p>어느날 갑자기 Spring mvc(<code>v3.2.2</code>)로 구현해놓은 REST API JSON 응답값에 null 값을 가지고 있는 필드가 포함이 되는 문제가 생겼다.</p>
 
 <p>분명히 도메인 객체에 <code>@JsonSerialize(include = Inclusion.NON_NULL)</code> 이 설정되어있고 잘 동작하던 코드였다.</p>
