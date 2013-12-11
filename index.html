@@ -9,7 +9,7 @@
   <meta name="author" content="rafael">
 
   
-  <meta name="description" content="어느날 갑자기 Spring mvc(v3.2.2)로 구현해놓은 REST API JSON 응답값에 null 값을 가지고 있는 필드가 포함이 되는 문제가 생겼다. 분명히 도메인 객체에 @JsonSerialize(include = Inclusion.NON_NULL) 이 &hellip;">
+  <meta name="description" content="아래 설명은 kibana3 + elasticsearch + logstash 로 설정이 완료됨을 가정한다. kibana3 메인 페이지를 들어가면 단순히 소개 페이지가 나온다. 소개페이지를 dashboard로 사용하고자 하지는 않을것이다. 그래서 logstash 에서 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/11/kibana-3-dashboard-default-seoljeonghagi/">Kibana 3 Dashboard Default 설정하기</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-11T16:16:00+09:00" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>아래 설명은 kibana3 + elasticsearch + logstash 로 설정이 완료됨을 가정한다.</p>
+
+<p>kibana3 메인 페이지를 들어가면 단순히 소개 페이지가 나온다.</p>
+
+<p><img src="/images/kibana.png" width="500" height="350"></p>
+
+<p>소개페이지를 dashboard로 사용하고자 하지는 않을것이다.</p>
+
+<p>그래서 logstash 에서 전달된 로그를 보려고 해당 dashboard를 설정하여 저장했을것이다.</p>
+
+<p>저장은 우측상단의 디스크 버튼을 누른후 dashboard 이름을 정하면 된다.</p>
+
+<p><img src="/images/kibana_nav.png"></p>
+
+<p>설정된 dashboard로 바로 가려면 아래와 같은 주소로 접근을 해야 할것이다.</p>
+
+<p><code>http://log.dashboard.com/#/dashboard/elasticsearch/Service Log DashBoard</code></p>
+
+<p>원하는건 <a href="http://log.dashboard.com">http://log.dashboard.com</a> 으로 접속하면 위 주소로 바로 이동하게 하는것이다.</p>
+
+<p>index.html 에 <code>meta refresh</code> 태그를 사용도 해봤지만 index.html 파일은 계속 사용되기 때문에 무한 반복이 발생하였다.</p>
+
+<p>먼저 내가 설정한 dashboard json 파일을 가져와야 한다.</p>
+
+<p>방법은 chrome 브라우저에서 rest client <a href="https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo?utm_source=chrome-ntp-icon">플러그인</a>을 설치 후 아래 주소를 입력한다.</p>
+
+<p>elasticsearch.server.host 는 본인의 주소로 변경하시길&hellip;</p>
+
+<p><code>http://elasticsearch.server.host:9200/kibana-int/dashboard/Service%20Log%20DashBoard</code></p>
+
+<p>아래와 같은 응답이 왔을것이다.</p>
+
+<p><img src="/images/dashboard_json.png"></p>
+
+<p>json 응답에서 source 밑에 dashboard 데이터를 복사하자.(주의! 쌍따옴표는 빼자)</p>
+
+<p>이를 다시 이쁜 json 으로 변경하기 위해 <a href="http://jsbeautifier.org">jsbeautify</a> 에 붙여넣기 한다.</p>
+
+<p><img src="/images/json_beauty.png"></p>
+
+<p>이를 다시 복사하여 kibana3 가 설치된 경로에서 /app/dashboards/default.json 에 덮어쓰면 끝이다.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -482,6 +558,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/11/kibana-3-dashboard-default-seoljeonghagi/">Kibana 3 Dashboard Default 설정하기</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/14/jsonignore-does-not-work/">JsonIgnore Does Not Work!!!</a>

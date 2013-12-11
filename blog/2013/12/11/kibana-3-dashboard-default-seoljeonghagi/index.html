@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>kibana 3 dashboard default 설정하기 - Rafael's blog</title>
+  <meta name="author" content="rafael">
+
+  
+  <meta name="description" content="아래 설명은 kibana3 + elasticsearch + logstash 로 설정이 완료됨을 가정한다. kibana3 메인 페이지를 들어가면 단순히 소개 페이지가 나온다. 소개페이지를 dashboard로 사용하고자 하지는 않을것이다. 그래서 logstash 에서 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://rafael81.github.io/blog/2013/12/11/kibana-3-dashboard-default-seoljeonghagi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Rafael's blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Rafael's blog</a></h1>
+  
+    <h2>Make simple</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:rafael81.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Kibana 3 Dashboard Default 설정하기</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-11T16:16:00+09:00" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>아래 설명은 kibana3 + elasticsearch + logstash 로 설정이 완료됨을 가정한다.</p>
+
+<p>kibana3 메인 페이지를 들어가면 단순히 소개 페이지가 나온다.</p>
+
+<p><img src="/images/kibana.png" width="500" height="350"></p>
+
+<p>소개페이지를 dashboard로 사용하고자 하지는 않을것이다.</p>
+
+<p>그래서 logstash 에서 전달된 로그를 보려고 해당 dashboard를 설정하여 저장했을것이다.</p>
+
+<p>저장은 우측상단의 디스크 버튼을 누른후 dashboard 이름을 정하면 된다.</p>
+
+<p><img src="/images/kibana_nav.png"></p>
+
+<p>설정된 dashboard로 바로 가려면 아래와 같은 주소로 접근을 해야 할것이다.</p>
+
+<p><code>http://log.dashboard.com/#/dashboard/elasticsearch/Service Log DashBoard</code></p>
+
+<p>원하는건 <a href="http://log.dashboard.com">http://log.dashboard.com</a> 으로 접속하면 위 주소로 바로 이동하게 하는것이다.</p>
+
+<p>index.html 에 <code>meta refresh</code> 태그를 사용도 해봤지만 index.html 파일은 계속 사용되기 때문에 무한 반복이 발생하였다.</p>
+
+<p>먼저 내가 설정한 dashboard json 파일을 가져와야 한다.</p>
+
+<p>방법은 chrome 브라우저에서 rest client <a href="https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo?utm_source=chrome-ntp-icon">플러그인</a>을 설치 후 아래 주소를 입력한다.</p>
+
+<p>elasticsearch.server.host 는 본인의 주소로 변경하시길&hellip;</p>
+
+<p><code>http://elasticsearch.server.host:9200/kibana-int/dashboard/Service%20Log%20DashBoard</code></p>
+
+<p>아래와 같은 응답이 왔을것이다.</p>
+
+<p><img src="/images/dashboard_json.png"></p>
+
+<p>json 응답에서 source 밑에 dashboard 데이터를 복사하자.(주의! 쌍따옴표는 빼자)</p>
+
+<p>이를 다시 이쁜 json 으로 변경하기 위해 <a href="http://jsbeautifier.org">jsbeautify</a> 에 붙여넣기 한다.</p>
+
+<p><img src="/images/json_beauty.png"></p>
+
+<p>이를 다시 복사하여 kibana3 가 설치된 경로에서 /app/dashboards/default.json 에 덮어쓰면 끝이다.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rafael</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-11T16:16:00+09:00" pubdate data-updated="true">Dec 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/elasticsearch/'>elasticsearch,</a>, <a class='category' href='/blog/categories/kibana3/'>kibana3,</a>, <a class='category' href='/blog/categories/logstash/'>logstash</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://rafael81.github.io/blog/2013/12/11/kibana-3-dashboard-default-seoljeonghagi/" data-via="" data-counturl="http://rafael81.github.io/blog/2013/12/11/kibana-3-dashboard-default-seoljeonghagi/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/10/14/jsonignore-does-not-work/" title="Previous Post: JsonIgnore does not work!!!">&laquo; JsonIgnore does not work!!!</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/12/11/kibana-3-dashboard-default-seoljeonghagi/">Kibana 3 Dashboard Default 설정하기</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/14/jsonignore-does-not-work/">JsonIgnore Does Not Work!!!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/13/intellj-joheunjeomeul-cajaboja/">Intellj 좋은점을 찾아보자</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/11/maven-eseo-java-wa-scala-gati-sseugi/">Eclipse 에서 Maven 으로 Java 와 Scala 같이 쓰기</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/31/peurogsi-proxy-e-gwanhan-modeungeos/">프록시(proxy)에 관한 모든것</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - rafael -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
